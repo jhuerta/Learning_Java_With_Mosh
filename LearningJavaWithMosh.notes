@@ -1,0 +1,66 @@
+#INSTALLING JAVA, JDK#
+
+A new JDK version is released every 6 months. The previous versions expires and not longer supported.
+
+LTS means supported until several years and no new features introduce, mantaining compabilities.. From Sept 2018 for Sept 2026 for JDK11 (LTS)
+
+There are multiple vendors of the same JDK version. They release with the same numbers.
+
+Regardless of the vendor, any JVM will run it.
+
+We will use JDK 11 from Amazon (Corretto) and IntelliJ Community Edition
+
+#DATA TYPES#
+
+Primitive data types:
+  boolean, byte, char, short, int, long,float, double
+  //INT
+  Going beyond/below max/min int value will overflow/underflow, no error.
+  int thousandsSeparator = 1_123_456_789; !This is valid!
+
+  By default, Java uses Integer and Doubles. So operations with mixed integers (short, byte) it will be casted into integer, and same with float/doubles
+  float aFloat = 123.123f;
+  double aFloat = 123d;
+
+  Use double over float, and pretty much even integer;
+
+  //String
+  Strings are inmutable, and it is not a primitive type, although quite used 
+
+#OPERATORS#
+  / * + - = ++ -- += -= *= /= == > >= < <= && || 'cond ? X:Y != ! 
+
+#KEYWORDS, EXPRESSIONS#
+
+#FLOW STATEMENTS
+if
+Switch:
+  Dont forget to add the break after each case block
+for
+while
+
+
+
+
+
+== TITLE ==
+#SUBTITLE#
+//TINY TITLE
+FINAL TITLE:
+  - Ordered list:
+    1. Item 1
+    2. Item 2
+  - Unordered list:
+    - Item 1
+    - Item 2
+  ---> Arrow
+  ===> Double Arrow
+!Alert 1! `Alert 2` "Alert 3" 
+-= Heading 1 =-
+== Heading 2 ==
+[java]
+function() {
+  console.log("nice syntax highlighting!");
+}
+[end]
+
