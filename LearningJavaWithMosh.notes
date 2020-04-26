@@ -39,9 +39,123 @@ Switch:
 for
 while
 
+byte>short>int>long>float>double
+
+#INHERITANCE
+Use downcastiiing and upcastingn.
+When a method speciify a father class, and you pass a child class, it will work. Inheritance is a isA relationship. If within the method, you want to access methods of the childclass, you can check if the object pass (of type PARENT) is in fact a CHILD. You can check that with instanceof operator. If you validate the object passed is of instanceof CHILD, you can cast the object to CHILD and then access the method.
+
+Use this approach when overriding the equals method and making sure that you compare objects of the same type (the equals method receives and Object as parameter)
 
 
+public void printObject(superClasss element)
+{
+  if(element isinstanceof childClass)
+  {
+    var myChildClass = (childClass) element;
+    myChildClass.methodOfOnlyChildClass();
+  }
+}
 
+#EQUALS ==
+Remember to overrid equals and hashCode (refactoring gives you this two options)
+
+#Exceptions
+Use try/catch initilizaing the resource in the try statment (try(new Reosorce). This way, the close of the resource is done automatically)
+
+#GENERICS
+In principle, only using reference types (no primitives)
+If you want to use a primitive (int, float, boolean), you need to use its corresponding WRAPPER CLASS!!
+Integer for int, Float for float or Boolean for booleanf
+
+public class myList<T extends Number&Comparable> {} (where Number is a constrain for the type of T. This is optional)
+
+Generics can be applied also ONLY to methods (not to the whole class)
+
+!!! Use of wildcards as parameter :
+MyMethod(MyList<? extends User> theList){} --> You can use ? as the wild card to avoid specifying a type
+With extend we limit the ? to User class (or its derivatives)
+
+If you would like to add (or I guess other operations) to the parameter passed, you can use the keyword super --> MyMethod(MyList<? super User> theList){}, but then, you cannot read (as in super)
+
+#Comparable
+When implementing the comparable interface, we still can't use < or >, we have to use the "compareTo() < 0" to know whether is greater (positive), less (negative) or equals (0)
+
+#COLLECTIONS
+== compares the object itself (address), while equalsTo compare the content
+
+#LAMBDA EXPRESSIONS
+
+#EXTREMELY USEFUL INTERFACES
+Consumer -> Execute an operation on an object (no return value). You can concatenate actions, like first send an email, then generate a report for each element in a list.
+Supplier -> Generates a value (out of no parameter) like get random number
+Function -> Performs an operation on an object, returning a differnt object (map). You can concatenate actions, like multiple transformations chained.
+Predicate -> Evaluates an expression and return a boolean (condition). You can combine predicates, like checking multiple conditions wiht AND, OR, or negate
+Binary Operator: Similar to function, but requires 2 objects of same type, and return the same type. Can be chained with a function. Like add and then square.
+Unary operatator: Similar to a function, where the input and output are of same type and can be as well chained with another unary operator or function.
+
+#STREAMS
+Extremely useful, in combination with the interfaces above:
+First, get the stream of the list of values, then apply:
+  map, faltmap, filter, limit, skip, sorted, distinct or peek
+  These are called intermediate operations, the still return another stream where you can act upon.
+
+  Then, you have reducers, where reduced the stream to a value:
+  count, anyMatch, allMatch
+
+
+#TRICKS
+Optional type, will throw an exception when calling get is null, you can use orElse(value) as a default value if null
+
+Use 'collectors' kind of reduce
+
+#COOL TO HAVE IN MIND
+Streams, Mapping Filtering, Slicing, Sorting, Reducing and Collections
+
+#THREADS
+First implement a runnable interface, and put your 'threadable' code in there.
+
+Run your code by putting that thread into a threaad (new Thread(runnable)) and starting.
+
+You can interrupt the thread, by calling thread.interrupt(). This will send a signal to the thread that NEEDS TO BE CAUGHT in the runnable code (Thread.currentThread().isInterrupted())
+
+You can use lock interface (ReentrantLock implementation) as a lock mecanism. With this, you can wrap and protect the shared resrouce with .lock() and .unlock(). Ideally, the .unlock in a finally method (so thereare no dead locks);
+
+In addition you can use a syncronized block:
+  synchronized(monitor_object)
+  {
+    the shared resource here
+  }
+  Use different monitor_object for each shared resource
+
+  Another alternative, is use a syncronized method
+  public synchronized void sharedResourceMethod()
+  {
+    // Inside here we are using this as a monitor object
+  }
+
+  You can use also a volatile keyword to let the compiler know that the field can change, avoiding visibility problems across threads. This is not relatd to race conditions, but instead, about VISIBILITY. 
+
+  wait/notify/notifyall within syncronized blocks (using same monitor object) to sleep threads
+  Avoid using synchronizations and wait/notify methods as it get quite complex.
+
+  !Preferred approach: AtomicClasses!: This classes are quite limited (counters basically)
+
+  Similar to AtomicClasses, if we are going to add/substract on a shared class, we can use the Adder classes, which are thread safe
+
+  !Synchronized collection!!!! Use this to share collections and forget about synchronizations, and treat the collection as regular collection:
+    Collection<Integer> numbers = Collections.synchronizedCollection(new ArrayList<>());
+
+#Executive Framework: An easy way to work with threads
+IExecutorService (and the implementations): Thread pools and specific pools
+Use the Executor factory to implement this classes
+var executor = Executor.newFixedThreadPool
+executor.submit(()-> {something to do})
+Executor.shutdown (grafecully)
+
+Executor does not fix the issue with shared resources
+
+Use completable futures for async programming
 
 == TITLE ==
 #SUBTITLE#

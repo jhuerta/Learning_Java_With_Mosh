@@ -1,8 +1,10 @@
 package com.company;
 
 import java.awt.*;
+import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Main {
 
@@ -10,12 +12,64 @@ public class Main {
 //    dataTypes();
 //    arraysAndBeyond();
 //    matrix();
-    constants();
+//    constants();
+//        readingInput();
+        projectMortgteCalculator();
+    }
+
+    private static void projectMortgteCalculator()
+    {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Principal: " );
+        var principal = scanner.nextDouble();
+
+        System.out.print("Annual Interest Rate: " );
+        var annualInterestRate = scanner.nextDouble();
+
+        System.out.print("Period (years) " );
+        var years = scanner.nextInt();
+
+        var annualInterestRatePercentual = annualInterestRate/100/12;
+        var interestPlusOneToN = Math.pow(1 + annualInterestRate, years*12);
+
+        var monthlyMortgage = principal* annualInterestRatePercentual * interestPlusOneToN/(interestPlusOneToN - 1);
+        System.out.print("Mortgage :" + NumberFormat.getCurrencyInstance().format(monthlyMortgage));
+
+        scanner.close();
+
+    }
+
+    private static void readingInput(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Age? " );
+        var age = scanner.nextDouble();
+        System.out.println("You are : " + age);
+        scanner.nextLine();
+
+        System.out.print("Name? " );
+        var name = scanner.nextLine();
+        System.out.println("Your name is : " + name);
+        scanner.nextLine();
+
+        System.out.print("Location? " );
+        var Location = scanner.nextLine();
+        System.out.println("Your Location is : " + Location);
+        scanner.nextLine();
+
+        scanner.close();
     }
 
     private static void constants(){
         final float PI = 3.141593F;
         p("Final PI: ", PI);
+
+        String x = "1";
+        String y = "Hello";
+        System.out.println(Integer.parseInt(x));
+        System.out.println(Integer.parseInt(y));
     }
     private static void matrix()
     {
